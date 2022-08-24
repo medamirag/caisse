@@ -1,18 +1,47 @@
+import { DatePipe } from '@angular/common';
 import { Injectable } from '@angular/core';
+import { Commande } from '../models/commande';
+import { Lignecommande } from '../models/lignecommande';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LignecommandeService {
-  getAllByIDCommande(idCommande: number) {
-    throw new Error('Method not implemented.');
+  getAllByIDCommande(commande: Commande) {
+    return this.listelignecommande.filter(lignecmd=>lignecmd.commande==commande)
   }
   remove(idLigneCommande: Number) {
-    throw new Error('Method not implemented.');
-  }
-  addByCommande(idCommande: number) {
-    throw new Error('Method not implemented.');
-  }
+   let listelignecmdtemporaire:Lignecommande[]=[]
 
-  constructor() { }
-}
+   for (let i = 0; i < this.listelignecommande.length; i++) {
+    if(idLigneCommande!=i){
+      listelignecmdtemporaire.push(this.listelignecommande[i])
+    }
+    this.listelignecommande=listelignecmdtemporaire
+   }
+  }
+  listelignecommande!:Lignecommande[]
+caisse1={isAdmin:false,password:'',username:''} 
+caisse2={isAdmin:false,password:'',username:''}
+caisse3={isAdmin:false,password:'',username:''}
+
+client1={codeClient:'',nameClient:''}
+client2={codeClient:'',nameClient:''}
+client3={codeClient:'',nameClient:''}
+
+product1={codeProduct:'123',productName:'massage1',price:1000, famille:{id:1547,name:'massage',couleur:'00FF00'},size:'123'}
+product2={codeProduct:'123',productName:'massage1',price:1000, famille:{id:1547,name:'massage',couleur:'00FF00'},size:'123'}
+product3={codeProduct:'123',productName:'massage1',price:1000, famille:{id:1547,name:'massage',couleur:'00FF00'},size:'123'}
+ 
+
+constructor() { this.listelignecommande=[
+    {commande:{caissier:this.caisse1,client:this.client1,date:new Date("December 17, 1995"),montantTTC:0,numCmd:'1',status:false},price:1000,product: this.product1,qte:1,unit:'forf'},
+    {commande:{caissier:this.caisse2,client:this.client2,date:new Date("December 17, 1995"),montantTTC:0,numCmd:'1',status:false},price:1000,product: this.product2,qte:1,unit:'forf'},
+    {commande:{caissier:this.caisse3,client:this.client3,date:new Date("December 17, 1995"),montantTTC:0,numCmd:'1',status:false},price:1000,product: this.product3,qte:1,unit:'forf'},
+   
+  
+  ] }
+
+  addByCommande(commande:Commande){
+    this.listelignecommande.push(  {commande:{caissier:{isAdmin:false,password:'1',username:'1'},client:{codeClient:'1',nameClient:'1'},date:new Date("December 18, 2022"),montantTTC:10,numCmd:'12',status:false},price:2000,product: {codeProduct:'456',productName:'massage2',price:1000, famille:{id:1547,name:'massage',couleur:'00FF00'},size:'123'},qte:1,unit:'ml'});
+}}

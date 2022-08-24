@@ -5,12 +5,16 @@ import { Commande } from '../models/commande';
   providedIn: 'root'
 })
 export class CommandeService {
-  create() {
-    throw new Error('Method not implemented.');
-  }
-  add(commande: Commande) {
-    throw new Error('Method not implemented.');
-  }
+  Commandes!:Commande[]
+
+
+  
 
   constructor() { }
+  create() {
+    this.Commandes.push( {caissier:{isAdmin:false,password:'',username:''},client:{codeClient:'',nameClient:''},date:new Date("December 17, 1995"),montantTTC:0,numCmd:'1',status:false});
+  }
+  update(commande: Commande) {
+    return this.update;
+  }
 }
