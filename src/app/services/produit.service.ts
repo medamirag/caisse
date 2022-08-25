@@ -19,11 +19,28 @@ export class ProduitService {
   
   ] }
   
-  
+ getAllProductService(){
+  return this.listeProduit;
+ } 
  
-  getAllByFamille(famille:Famille) {
-return this.listeProduit.find(prod=>prod.famille==famille)
+  getAllProductByFamille(famille:Famille) { // correction name function : caisse.component.ts ligne 45
+return this.listeProduit.filter(prod=>prod.famille===famille);
   
-}}
+}
+  getAllProductByIDFamille(idFamille:number) { 
+return this.listeProduit.filter(prod=>prod.famille.id===idFamille);
+  
+}
+addProductService(produit : Product){
+  return this.listeProduit.push(produit);
+}
+getProductByCodeProductService(code:string){
+  return this.listeProduit.find(m=>m.codeProduct===code);
+
+}
+
+
+
+}
 
  

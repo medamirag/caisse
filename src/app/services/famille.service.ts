@@ -7,6 +7,7 @@ import { Famille } from '../models/famille';
 })
 export class FamilleService {
   familleList!:Famille[]
+
   constructor() {
     this.familleList=[
       {id:1547,name:'massage',couleur:'00FF00'},
@@ -18,5 +19,11 @@ export class FamilleService {
   getAll():Famille[]{
    return this.familleList;
 
+  }
+  addFamilleService(famille:Famille){
+   return this.familleList.push(famille);
+  }
+  getFamilleByIDService(idfamille:number){
+    return this.familleList.find(m=>m.id===idfamille)
   }
 }

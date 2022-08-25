@@ -2,11 +2,13 @@ import { DatePipe } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { Commande } from '../models/commande';
 import { Lignecommande } from '../models/lignecommande';
+import { CommandeService } from './commande.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LignecommandeService {
+  commande!:Commande
   getAllByIDCommande(commande: Commande) {
     return this.listelignecommande.filter(lignecmd=>lignecmd.commande==commande)
   }
@@ -34,14 +36,18 @@ product2={codeProduct:'123',productName:'massage1',price:1000, famille:{id:1547,
 product3={codeProduct:'123',productName:'massage1',price:1000, famille:{id:1547,name:'massage',couleur:'00FF00'},size:'123'}
  
 
-constructor() { this.listelignecommande=[
+constructor(private cmdService:CommandeService) { this.listelignecommande=[
     {commande:{caissier:this.caisse1,client:this.client1,date:new Date("December 17, 1995"),montantTTC:0,numCmd:'1',status:false},price:1000,product: this.product1,qte:1,unit:'forf'},
     {commande:{caissier:this.caisse2,client:this.client2,date:new Date("December 17, 1995"),montantTTC:0,numCmd:'1',status:false},price:1000,product: this.product2,qte:1,unit:'forf'},
     {commande:{caissier:this.caisse3,client:this.client3,date:new Date("December 17, 1995"),montantTTC:0,numCmd:'1',status:false},price:1000,product: this.product3,qte:1,unit:'forf'},
    
   
-  ] }
+  ]
+this.commande=this.cmdService.getCommandeActuelle()
 
-  addByCommande(commande:Commande){
-    this.listelignecommande.push(  {commande:{caissier:{isAdmin:false,password:'1',username:'1'},client:{codeClient:'1',nameClient:'1'},date:new Date("December 18, 2022"),montantTTC:10,numCmd:'12',status:false},price:2000,product: {codeProduct:'456',productName:'massage2',price:1000, famille:{id:1547,name:'massage',couleur:'00FF00'},size:'123'},qte:1,unit:'ml'});
-}}
+}
+
+  addByCommande(){
+
+}
+}

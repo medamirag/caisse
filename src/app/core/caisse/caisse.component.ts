@@ -25,14 +25,56 @@ status:false
 ligneCmd:Lignecommande[]=[];
 familleList:Famille[]=[];
 productList:Product[]=[];
-
+step:number=0;
+selctedFam = localStorage.getItem('selectFam');
   constructor(private clientService:ClientService, private commandeService:CommandeService,private ligneCommandeService:LignecommandeService,private productService:ProduitService,private familleService:FamilleService) 
   {
 
    }
 
   ngOnInit(): void {
+    //creation commande 
     this.familleList=this.familleService.getAll();//ToDo: Create getAll function in familleService
+    this.isChange()
+    
+    localStorage.setItem('selectFam','')
+
+
+    
+    
+  }
+  ngOnChanges():void{
+    console.log('selected famille =',this.selctedFam);
+    
+
+  }
+  isChange(){
+    //
+    console.log('selectedfam =',this.selctedFam);
+    console.log('localStorage',localStorage.getItem('selectFam'));
+    
+    if(this.selctedFam === localStorage.getItem('selectFam')){ 
+      console.log('sans click');
+      localStorage.setItem('selectFam','')
+      
+
+    }else{
+      this.setStep();
+      console.log('change');
+      this.selctedFam = localStorage.getItem('selectFam');
+     
+      this.selctedFam=''
+    }
+  }
+  setStep()
+  {
+    if(this.step===0){
+      this.step=1
+      
+    }
+    else{
+      this.step=0
+    }
   }
   getClientByCodeClient(codeClient:string){
    return this.clientService.getClientByCodeClient(codeClient) // ToDo : create getClientByCodeClient function in clientService that return client model
@@ -42,10 +84,10 @@ createCommande(){
   this.commandeService.create()// ToDo : Create create function in commandeService
 }
 getProductByFamille(famille:Famille){
-  this.productService.getAllByFamille(famille)// Bilel :ToDo : Create function getAllByFamille in productService
+  this.productService.getAllProductByFamille(famille)// Bilel :ToDo : Create function getAllByFamille in productService
 }
 addLigneCommandeByCommande(commande:Commande){
-  this.ligneCommandeService.addByCommande(commande)// bilel : ToDo : Create addByCommande in lignecommandeService and update commande(TTC)
+  // this.ligneCommandeService.addByCommande(commande)// bilel : ToDo : Create addByCommande in lignecommandeService and update commande(TTC)
 }
 removeLigneCommande(idLigneCommande:Number){
   this.ligneCommandeService.remove(idLigneCommande)//ToDo : Create remove in ligneCommandeService and update commande(TTC)
