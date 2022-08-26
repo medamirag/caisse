@@ -1,6 +1,14 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <div *ngFor="let el of products">
+        <button class="btn btn-danger" type="button" (click)="addProduct(el)" [ngStyle]="{'background': 'url(' + el.photo + ') no-repeat 0 0 / cover'}">{{el.productName}}</button>
+        <br>
 
-<div *ngFor="let el of products">
-    <button class="btn btn-danger" type="button" >{{el.productName}}</button>
-    <br>
-
+      </div>
+    </div>
+    <div class="col-sm">
+      <app-commande [refresh]=num></app-commande>
+    </div>
+</div> 
 </div>

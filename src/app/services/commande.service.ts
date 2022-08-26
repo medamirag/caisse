@@ -24,13 +24,21 @@ export class CommandeService {
 
   
 
-  constructor() { }
-  create() {
-    this.Commandes.push( {caissier:this.caissier,client:this.client,date:new Date("December 17, 1995"),montantTTC:0,numCmd:'1',status:false});
-  
+  constructor() { 
+    this.Commandes=[this.commande]
+  }
+  create():string {
+    this.Commandes.push( {caissier:this.caissier,client:this.client,date:new Date("December 17, 1995"),montantTTC:0,numCmd:'4',status:false});
+  return this.Commandes[this.Commandes.length-1].numCmd
 
   }
   update(commande: Commande) {
     return this.update;
+  }
+  getCmdBynumCmd(numCmd:any):Commande|any{
+    console.log("numCmd: "+numCmd);
+    console.log("Commandes: "+this.Commandes);
+    
+    return this.Commandes.find(cmd=>cmd.numCmd===numCmd)
   }
 }

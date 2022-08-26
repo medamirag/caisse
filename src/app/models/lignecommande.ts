@@ -1,7 +1,7 @@
 import { Commande } from "./commande";
 import { Product } from "./product";
 
-export interface Lignecommande {
+export interface LigneCommande {
     commande:Commande,
     qte:number,
     product:Product,

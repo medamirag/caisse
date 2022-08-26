@@ -1,0 +1,16 @@
+<div class="container">
+    <div class="row">
+      <div class="col-sm" (click)="isChange()">
+        <app-famille></app-famille>
+   
+        
+      </div>
+      <div class="col-sm">
+        <app-product [num]="num2"></app-product>
+        <input type="button" name="previous" class="previous action-button" (click)="setStep()" value="Home" />
+        <input type="button" name="previous" class="previous action-button" (click)="paye()" value="Payement" />
+      </div>
+      
+    </div>
+  </div>
+  

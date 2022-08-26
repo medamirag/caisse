@@ -1,7 +1,8 @@
 import { DatePipe } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { Commande } from '../models/commande';
-import { Lignecommande } from '../models/lignecommande';
+import { LigneCommande } from '../models/lignecommande';
+import { Product } from '../models/product';
 import { CommandeService } from './commande.service';
 
 @Injectable({
@@ -9,11 +10,11 @@ import { CommandeService } from './commande.service';
 })
 export class LignecommandeService {
   commande!:Commande
-  getAllByIDCommande(commande: Commande) {
-    return this.listelignecommande.filter(lignecmd=>lignecmd.commande==commande)
+  getAllByNumCmdCommande(numCmd:any) {
+    return this.listelignecommande.filter(lignecmd=>lignecmd.commande.numCmd==numCmd)
   }
   remove(idLigneCommande: Number) {
-   let listelignecmdtemporaire:Lignecommande[]=[]
+   let listelignecmdtemporaire:LigneCommande[]=[]
 
    for (let i = 0; i < this.listelignecommande.length; i++) {
     if(idLigneCommande!=i){
@@ -22,7 +23,7 @@ export class LignecommandeService {
     this.listelignecommande=listelignecmdtemporaire
    }
   }
-  listelignecommande!:Lignecommande[]
+  listelignecommande!:LigneCommande[]
 caisse1={isAdmin:false,password:'',username:''} 
 caisse2={isAdmin:false,password:'',username:''}
 caisse3={isAdmin:false,password:'',username:''}
@@ -47,7 +48,19 @@ this.commande=this.cmdService.getCommandeActuelle()
 
 }
 
-  addByCommande(){
+  addByCommande(produit:Product){
+    const numCmd=localStorage.getItem('cmd')
+    let commande:Commande=this.cmdService.getCmdBynumCmd(numCmd)
+let Lcmd=this.listelignecommande.find(cmd=>cmd.product===produit)
+if(Lcmd===undefined){
+  this.listelignecommande.push(
+    {commande:commande,price:produit.price,qte:1,product:produit,unit:"pcs"}
+  )
+}
+   else{
+    Lcmd.qte++
+    Lcmd.price=Lcmd.product.price*Lcmd.qte
+   }
 
 }
 }

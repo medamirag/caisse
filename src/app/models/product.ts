@@ -5,6 +5,7 @@ export interface Product {
     productName:string,
     price:number,
     famille:Famille,
-    size:string
+    size:string,
+    photo?:string
 
 }
